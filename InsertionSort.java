@@ -1,9 +1,9 @@
 public class InsertionSort{
 	public void sort(int[] unsorted){
-		for (int i=1;i<unsorted.length-1 ; i++ ) {
+		for (int i=1;i<unsorted.length; i++ ) {
 			System.out.println("Test data "+i +" "+unsorted.length);
 			int j=i;
-			while(unsorted[j]<unsorted[j-1] && j>0){
+			while(j>0 && unsorted[j]<unsorted[j-1] ){
 				System.out.println("IN WHILE "+j);
 				swap(unsorted,j,j-1);
 				System.out.println("IN WHILE2 "+j);
