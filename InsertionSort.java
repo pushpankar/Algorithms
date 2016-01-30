@@ -1,19 +1,16 @@
 public class InsertionSort{
 	public void sort(int[] unsorted){
+		Test test =new Test();
 		for (int i=1;i<unsorted.length; i++ ) {
-			System.out.println("Test data "+i +" "+unsorted.length);
+			//This first loop picks up an element starting from pos=1 to end
 			int j=i;
+			//Then it compares and swaps with all previous elements until it finds a smaller element.
+			//The size of the sorted array keeps on increasing i.e. it is stable.
 			while(j>0 && unsorted[j]<unsorted[j-1] ){
-				System.out.println("IN WHILE "+j);
-				swap(unsorted,j,j-1);
-				System.out.println("IN WHILE2 "+j);
+				test.swap(unsorted,j,j-1);
 				j--;
 			}
 		}
 	}
-	private void swap(int[] arr,int pos1,int pos2){
-		int temp=arr[pos2];
-		arr[pos2]=arr[pos1];
-		arr[pos1]=temp;
-	}
+	
 }
