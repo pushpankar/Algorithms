@@ -1,10 +1,7 @@
-public class InsertionSort{
+public class InsertionSort extends Sorting{
 	public static void main(String[] args){
-		Test test=new Test();
-		InsertionSort inrstSort=new InsertionSort();
-		int[] inputArray=test.getData();
-		inrstSort.sort(inputArray);
-		test.printArray(inputArray);
+		InsertionSort insertSort=new InsertionSort();
+		insertSort.init(insertSort);
 	}
 	public void sort(int[] unsorted){
 		Test test=new Test();

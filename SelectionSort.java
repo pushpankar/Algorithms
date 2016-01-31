@@ -1,10 +1,7 @@
-public class SelectionSort{
+public class SelectionSort extends Sorting{
 	public static void main(String[] args){
-		Test test=new Test();
 		SelectionSort selectnSort=new SelectionSort();
-		int[] inputArray=test.getData();
-		selectnSort.sort(inputArray);
-		test.printArray(inputArray);
+		selectnSort.init(selectnSort);
 	}
 	public void sort(int[] unsortedArr){
 		//Create an instance of Test class to take input from user
