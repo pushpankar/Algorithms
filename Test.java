@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class Test{
-	public static void main(String[] args) {
-		//Create a object of this class since we can not call non static method from a static method.
-		Test test=new Test();
+	public int[] getData(){
 		//keeping it interactive while reading  input from user
 		System.out.print("Input Size:");
 		//Getting the size of array
@@ -16,15 +14,7 @@ public class Test{
 		for(int i=0;i<size;i++){
 			unsrtArr[i]=scan.nextInt();
 		}
-		//Here i am calling the sorting method
-		/*@ToDo: IMPLEMENT A BETTER DESIGN PATTERN FOR IMPLEMENTING ALL SORTING ALGO BY USING THIS TEST CLASS*/
-		InsertionSort insrtSort=new InsertionSort();
-		insrtSort.sort(unsrtArr);
-
-		//test.sort();
-		
-		test.printArray(unsrtArr);
-		
+		return unsrtArr;
 	}
 	//This method prints all the elements of an array
 	public void printArray(int[] arr){
@@ -37,5 +27,4 @@ public class Test{
 		arr[pos2]=arr[pos1];
 		arr[pos1]=temp;
 	}
-	//public abstract void sort();
 }

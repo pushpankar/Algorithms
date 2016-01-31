@@ -1,6 +1,13 @@
 public class InsertionSort{
+	public static void main(String[] args){
+		Test test=new Test();
+		InsertionSort inrstSort=new InsertionSort();
+		int[] inputArray=test.getData();
+		inrstSort.sort(inputArray);
+		test.printArray(inputArray);
+	}
 	public void sort(int[] unsorted){
-		Test test =new Test();
+		Test test=new Test();
 		for (int i=1;i<unsorted.length; i++ ) {
 			//This first loop picks up an element starting from pos=1 to end
 			int j=i;

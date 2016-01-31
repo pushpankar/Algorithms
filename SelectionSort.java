@@ -1,4 +1,11 @@
 public class SelectionSort{
+	public static void main(String[] args){
+		Test test=new Test();
+		SelectionSort selectnSort=new SelectionSort();
+		int[] inputArray=test.getData();
+		selectnSort.sort(inputArray);
+		test.printArray(inputArray);
+	}
 	public void sort(int[] unsortedArr){
 		//Create an instance of Test class to take input from user
 		Test test=new Test();
