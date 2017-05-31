@@ -1,5 +1,5 @@
-#include <vector>
 #include <algorithm>
+#include <vector>
 #include <iostream>
 #include <unordered_set>
 
@@ -7,34 +7,34 @@ using namespace std;
 
 class Graph{
 private:
-  vector< vector< int > > adj;
+  vector<vector<long> > adj;
 public:
-  Graph(int n);
-  void add_edge(int u, int v);
-  int find(vector<int> parent, int u);
-  void create_union(vector<int>& parent, vector<int>& rank, int u, int v);
+  vector<bool> visited;
+  Graph(long n);
+  void add_edge(long u, long v);
+  long find(vector<long> parent, long u);
+  void create_union(vector<long>& parent, vector<long>& rank, long u, long v);
+  void dfsUtil(long start);
 };
 
-Graph::Graph(int n){
-  vector<vector<int> > adjMat(n);
-  adj = adjMat;
+Graph::Graph(long n):adj(n),visited(n, false){
 }
 
-void Graph::add_edge(int u, int v){
+void Graph::add_edge(long u, long v){
   adj[u].push_back(v);
   adj[v].push_back(u);
 }
 
-int Graph::find(vector<int> parent, int u){
+long Graph::find(vector<long> parent, long u){
   if(parent[u] == u){
     return u;
   }
   return find(parent, parent[u]);
 }
 
-void Graph::create_union(vector<int>& parent, vector<int>& rank, int u, int v){
-  int uroot = find(parent, u);
-  int vroot = find(parent, v);
+void Graph::create_union(vector<long>& parent, vector<long>& rank, long u, long v){
+  long uroot = find(parent, u);
+  long vroot = find(parent, v);
 
   if(rank[uroot] < rank[vroot]){
     parent[uroot] = vroot;
@@ -46,41 +46,48 @@ void Graph::create_union(vector<int>& parent, vector<int>& rank, int u, int v){
   }
 }
 
+void Graph::dfsUtil(long start){
+  for(vector<long>::iterator it = adj[start].begin(); it != adj[start].end(); it++){
+    if(!visited[*it]){
+      visited[*it] = true;
+      dfsUtil(*it);
+    }
+  }
+}
+
 int main(){
-  int q;
+  long q;
   cin >> q;
-  for(int j = 0; j < q; j++){
-    int n, m, c_lib, c_road;
+  for(long j = 0; j < q; j++){
+    long n, m, c_lib, c_road;
     cin >> n >> m >> c_lib >> c_road;
-    vector<int> parent, rank(n, 0);
-    int total_weight = 0;
-    for(int i = 0; i < n; i++){
+    vector<long> parent, rank(n, 0);
+    for(long i = 0; i < n; i++){
       parent.push_back(i);
     }// vector<Edge> edges;
     Graph g(n);
-    for(int i = 0; i < m; i++){
-      int u, v;
+    for(long i = 0; i < m; i++){
+      long u, v;
       cin >> u >> v;
       u--;
       v--;
       g.add_edge(u, v);
       // edges.push_back(e);
-      g.create_union(parent, rank, u, v);
+      // g.create_union(parent, rank, u, v);
     }
     if(c_lib <= c_road){
       cout << c_lib * n << endl;
       continue;
     }
-    unordered_set<int> set;
-    int cost = 0;
-    for(int i = 0; i < n; i++){
-      if(set.find(g.find(parent, i)) == set.end()){
-        cost += c_lib;
-        set.insert(g.find(parent, i));
-      }else{
-        cost += c_road;
+    long s = 0; // s is seperate components
+    for(long i = 0; i < n; i++){
+      if(!g.visited[i]){
+        g.dfsUtil(i);
+        s++;
       }
     }
-    cout << cost << endl;
+    
+    cout << (s * c_lib) + ((n - s) * c_road) << endl;
   }
+  return 0;
 }
