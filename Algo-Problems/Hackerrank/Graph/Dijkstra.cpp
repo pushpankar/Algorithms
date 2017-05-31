@@ -58,10 +58,11 @@ HeapNode Heap::extractMin(){
   HeapNode temp = heap[0];
   heap[0] = heap[heap.size()];
   heap.pop_back();
+  minHeapify(0);
   return temp;
 }
 void Heap::buildMinHeap(){
-  for(int i = heap.size()/2; i >= 0; i++){
+  for(int i = heap.size()/2; i >= 0; i--){
     minHeapify(i);
   }
 }
